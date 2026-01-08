@@ -12,4 +12,4 @@ https://github.com/WordPress/gutenberg
 Gutenberg contribution এর জন্য ready! যখন GitHub issues বা PRs-এ কাজ করবেন, এখানে track করতে পারবেন।
 
 ---
-**Total**: 6 PRs (as of Jan 8, 2026)
+**Total**: 4 PRs (Testing & Review)
