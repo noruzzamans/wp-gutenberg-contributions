@@ -1,15 +1,16 @@
-# Gutenberg Contributions
+# WordPress Gutenberg Contributions
 
-## Repository
-https://github.com/WordPress/gutenberg
+Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
-## Folder Structure
-- `contributed/` - Issues & PRs I've participated in
-- `merged/` - My merged PRs
-- `next-targets/` - 2026 contribution goals
+## Quick Navigation
+- 📝 [Contributed PRs](./contributed/issues-prs.md) - All my contributions
+- ✅ [Merged PRs](./merged/prs.md) - PRs merged into Gutenberg
+- 🎯 [Next Targets](./next-targets/2026-goals.md) - 2026 contribution goals
 
-## 2026 Plan
-Gutenberg contribution এর জন্য ready! যখন GitHub issues বা PRs-এ কাজ করবেন, এখানে track করতে পারবেন।
+## Stats
+- **Total Contributions**: 4 PRs
+- **Merged**: 2 ✅
+- **Active Testing**: 2 PRs
 
 ---
-**Total**: 4 PRs (2 active, 2 merged ✅)
+**Last Updated**: January 8, 2026
