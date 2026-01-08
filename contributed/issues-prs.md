@@ -8,14 +8,13 @@
 
 ### Merged (Props Received) ✅
 - https://github.com/WordPress/gutenberg/pull/73660 - useCommandLoader example fix (Merged Dec 8, 2025)
-- https://github.com/WordPress/gutenberg/pull/73082 - JSDoc for BlockRemovalWarnings, BlockVisibility, BlogTitle (Merged Dec 5, 2025)
 - https://github.com/WordPress/gutenberg/pull/73651#issuecomment-3590955365 - JSDoc for getUserLabel (Merged Dec 2, 2025)
 
 ## Contribution Type
 - ✅ Testing PRs locally
 - ✅ Code review and feedback
 - ✅ Documentation review
-- ✅ Props received on 3 merged PRs
+- ✅ Props received on 2 merged PRs
 
 ---
-**Total Contributions**: 5 PRs (2 active, 3 merged ✅)
+**Total Contributions**: 4 PRs (2 active, 2 merged ✅)
