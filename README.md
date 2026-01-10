@@ -3,17 +3,18 @@
 Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## Quick Navigation
-- 📝 [Contributed PRs](./contributed/issues-prs.md) - All my contributions
-- ✅ [Merged PRs](./merged/prs.md) - PRs merged into Gutenberg
-- 🎯 [Next Targets](./next-targets/2026-goals.md) - 2026 contribution goals
+- 📝 [All Contributions](./contributed/issues-prs.md) - Every PR I'm involved in
+- ✅ [Merged PRs](./merged/prs.md) - PRs merged with my props
+- 🎯 [2026 Goals](./next-targets/2026-goals.md) - Contribution goals
 
 ## Stats (Auto-Updated)
 | Metric | Count |
 |--------|-------|
-| 💬 Comments | 0 |
 | 👀 PR Reviews | 1 |
-| ✅ Merged (Props) | 2 |
-| **Total** | **3** |
+| 💬 PR Comments | 6 |
+| ✅ Props Received | 2 |
+| ⏳ No Props Yet | 5 |
+| **Total Involved** | **7** |
 
 ---
 **Last Synced**: January 10, 2026
