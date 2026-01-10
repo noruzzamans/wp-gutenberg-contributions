@@ -43,10 +43,16 @@ jobs:
           git diff --quiet || echo "changes=true" >> $GITHUB_OUTPUT
       
       - name: Commit and push changes
-        if: steps.changes.outputs.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          git commit -m "🔄 Auto-sync Gutenberg contributions - $(date +'%Y-%m-%d')"
-          git push origin main
+          
+          # Check if there are changes
+          if [[ -n $(git status -s) ]]; then
+            echo "📝 Changes detected, committing..."
+            git add -A
+            git commit -m "🔄 Auto-sync Gutenberg contributions - $(date +'%Y-%m-%d')"
+            git push origin main
+          else
+            echo "✅ No changes needed"
+          fi
