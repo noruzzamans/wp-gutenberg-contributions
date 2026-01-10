@@ -754,14 +754,14 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## 📈 Stats (Auto-Updated)
 
-<table>
+<table width="100%">
 <tr>
-<td align="center"><b>📊 Contributions</b></td>
-<td align="center"><b>📁 My PRs</b></td>
-<td align="center"><b>🎯 Highlights</b></td>
+<td width="33.33%" align="center"><b>📊 Contributions</b></td>
+<td width="33.33%" align="center"><b>📁 My PRs</b></td>
+<td width="33.34%" align="center"><b>🎯 Highlights</b></td>
 </tr>
 <tr>
-<td>
+<td width="33.33%">
 
 | Metric | Count |
 |:-------|------:|
@@ -774,7 +774,7 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | **Total** | **${allPRs.length}** |
 
 </td>
-<td>
+<td width="33.33%">
 
 | Status | Count |
 |:-------|------:|
@@ -784,7 +784,7 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | **Total** | **${myPRs.length}** |
 
 </td>
-<td>
+<td width="33.34%">
 
 | Metric | Value |
 |:-------|:------|
