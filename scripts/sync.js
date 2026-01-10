@@ -752,40 +752,46 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 ### 🎯 Goals
 - [2026 Goals](./next-targets/2026-goals.md) - Contribution goals
 
-## Stats (Auto-Updated)
+## 📈 Stats (Auto-Updated)
 
-<table width="100%">
+<table>
 <tr>
-<td width="50%" valign="top">
+<td align="center"><b>📊 Contributions</b></td>
+<td align="center"><b>📁 My PRs</b></td>
+<td align="center"><b>🎯 Highlights</b></td>
+</tr>
+<tr>
+<td>
 
-### 📊 Contributions on Others' PRs
 | Metric | Count |
-|--------|-------|
-| [👀 PR Reviews](./contributed/reviews.md) | ${reviews} |
-| [💬 PR Comments](./contributed/comments.md) | ${comments} |
-| [✅ Props Received](./contributed/with-props.md) | ${withProps} |
-| [🔄 Props Waiting](./contributed/props-waiting.md) | ${propsWaiting} |
-| [❌ Closed (No Props)](./contributed/closed-no-props.md) | ${closedNoProps} |
-| [🤔 Merged (No Props)](./contributed/merged-no-props.md) | ${mergedNoProps} |
-| **Total Involved** | **${allPRs.length}** |
+|:-------|------:|
+| [👀 Reviews](./contributed/reviews.md) | ${reviews} |
+| [💬 Comments](./contributed/comments.md) | ${comments} |
+| [✅ Props](./contributed/with-props.md) | ${withProps} |
+| [🔄 Waiting](./contributed/props-waiting.md) | ${propsWaiting} |
+| [❌ Closed](./contributed/closed-no-props.md) | ${closedNoProps} |
+| [🤔 No Props](./contributed/merged-no-props.md) | ${mergedNoProps} |
+| **Total** | **${allPRs.length}** |
 
 </td>
-<td width="50%" valign="top">
+<td>
 
-### 📁 My Authored PRs
 | Status | Count |
-|--------|-------|
+|:-------|------:|
 | [🟡 Open](./my-prs/open.md) | ${myOpen} |
 | [❌ Closed](./my-prs/closed.md) | ${myClosed} |
 | [✅ Merged](./my-prs/merged.md) | ${myMerged} |
 | **Total** | **${myPRs.length}** |
 
-### 🎯 Achievement Highlights
+</td>
+<td>
+
 | Metric | Value |
-|--------|-------|
-| 📈 Props Rate | ${withProps}/${allPRs.length} (${Math.round((withProps / allPRs.length) * 100) || 0}%) |
-| 🎉 Total Contributions | ${allPRs.length + myPRs.length} |
-| 🚀 Active Areas | Reviews, Comments |
+|:-------|:------|
+| 📈 Props Rate | **${Math.round((withProps / allPRs.length) * 100) || 0}%** |
+| 🎉 Total | **${allPRs.length + myPRs.length}** PRs |
+| � Active | **${propsWaiting + myOpen}** pending |
+| ⭐ Success | **${withProps + myMerged}** completed |
 
 </td>
 </tr>
