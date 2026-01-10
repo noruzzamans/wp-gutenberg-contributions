@@ -23,7 +23,11 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## Stats (Auto-Updated)
 
-### Contributions on Others' PRs
+<table>
+<tr>
+<td valign="top">
+
+### 📊 Contributions on Others' PRs
 | Metric | Count |
 |--------|-------|
 | [👀 PR Reviews](./contributed/reviews.md) | 1 |
@@ -34,13 +38,20 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | [🤔 Merged (No Props)](./contributed/merged-no-props.md) | 1 |
 | **Total Involved** | **7** |
 
-### My Authored PRs
+</td>
+<td valign="top">
+
+### 📁 My Authored PRs
 | Status | Count |
 |--------|-------|
 | [🟡 Open](./my-prs/open.md) | 0 |
 | [❌ Closed](./my-prs/closed.md) | 2 |
 | [✅ Merged](./my-prs/merged.md) | 0 |
 | **Total** | **2** |
+
+</td>
+</tr>
+</table>
 
 ---
 **Last Synced**: January 10, 2026

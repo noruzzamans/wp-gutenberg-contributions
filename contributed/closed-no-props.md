@@ -3,7 +3,7 @@
 PRs that were **closed without being merged** - no props possible.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T14:25:57.152Z -->
+<!-- Last synced: 2026-01-10T14:38:06.008Z -->
 
 - ❌ [#74229](https://github.com/WordPress/gutenberg/pull/74229) - Query Loop: Add Random order option
   - **Contribution**: 💬 Comment
