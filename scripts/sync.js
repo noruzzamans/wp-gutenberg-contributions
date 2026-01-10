@@ -13,7 +13,12 @@ const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
 // Paths
 const ROOT_DIR = path.join(__dirname, '..');
-const CONTRIBUTED_FILE = path.join(ROOT_DIR, 'contributed', 'issues-prs.md');
+const CONTRIBUTED_DIR = path.join(ROOT_DIR, 'contributed');
+const CONTRIBUTED_FILE = path.join(CONTRIBUTED_DIR, 'issues-prs.md');
+const CONTRIBUTED_REVIEWS = path.join(CONTRIBUTED_DIR, 'reviews.md');
+const CONTRIBUTED_COMMENTS = path.join(CONTRIBUTED_DIR, 'comments.md');
+const CONTRIBUTED_WITH_PROPS = path.join(CONTRIBUTED_DIR, 'with-props.md');
+const CONTRIBUTED_WITHOUT_PROPS = path.join(CONTRIBUTED_DIR, 'without-props.md');
 const MERGED_FILE = path.join(ROOT_DIR, 'merged', 'prs.md');
 const README_FILE = path.join(ROOT_DIR, 'README.md');
 const MY_PRS_DIR = path.join(ROOT_DIR, 'my-prs');
@@ -351,6 +356,137 @@ PRs I submitted to Gutenberg that got merged.
   return content;
 }
 
+// Generate contributed/reviews.md
+function generateReviewsFile(allPRs) {
+  const reviews = allPRs.filter(p => p.contributionType === 'review');
+
+  let content = `# PR Reviews
+
+PRs where I submitted a review.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (reviews.length === 0) {
+    content += `*No reviews yet*\n\n`;
+  } else {
+    for (const pr of reviews) {
+      const propsIcon = pr.hasProps ? '✅' : '⏳';
+      content += `- 👀 [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)} | **Props**: ${propsIcon}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Reviews**: ${reviews.length} PRs
+`;
+
+  return content;
+}
+
+// Generate contributed/comments.md
+function generateCommentsFile(allPRs) {
+  const comments = allPRs.filter(p => p.contributionType === 'comment');
+
+  let content = `# PR Comments
+
+PRs where I left comments.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (comments.length === 0) {
+    content += `*No comments yet*\n\n`;
+  } else {
+    for (const pr of comments) {
+      const propsIcon = pr.hasProps ? '✅' : '⏳';
+      content += `- 💬 [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)} | **Props**: ${propsIcon}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Comments**: ${comments.length} PRs
+`;
+
+  return content;
+}
+
+// Generate contributed/with-props.md
+function generateWithPropsFile(allPRs) {
+  const withProps = allPRs.filter(p => p.hasProps);
+
+  let content = `# Props Received
+
+PRs where I received props in the merge commit.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (withProps.length === 0) {
+    content += `*No props received yet*\n\n`;
+  } else {
+    for (const pr of withProps) {
+      const typeIcon = pr.contributionType === 'review' ? '👀' : '💬';
+      content += `- ✅ [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Contribution**: ${typeIcon} ${pr.contributionType === 'review' ? 'Review' : 'Comment'}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Props Received**: ${withProps.length} PRs
+`;
+
+  return content;
+}
+
+// Generate contributed/without-props.md
+function generateWithoutPropsFile(allPRs) {
+  const withoutProps = allPRs.filter(p => !p.hasProps);
+
+  let content = `# No Props Yet
+
+PRs where I contributed but haven't received props yet.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (withoutProps.length === 0) {
+    content += `*All contributions have received props!*\n\n`;
+  } else {
+    for (const pr of withoutProps) {
+      const typeIcon = pr.contributionType === 'review' ? '👀' : '💬';
+      const status = pr.isMerged ? 'Merged (No Props)' : 'Open/Closed';
+      content += `- ⏳ [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Contribution**: ${typeIcon} ${pr.contributionType === 'review' ? 'Review' : 'Comment'}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)} | **Status**: ${status}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Without Props**: ${withoutProps.length} PRs
+`;
+
+  return content;
+}
+
 // Generate contributed/issues-prs.md content - ALL contributions
 function generateContributedContent(allPRs) {
   // Sort by date descending
@@ -494,7 +630,10 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ### 📊 Contributions (on others' PRs)
 - 📝 [All Contributions](./contributed/issues-prs.md) - Every PR I'm involved in
-- ✅ [Merged PRs (Props)](./merged/prs.md) - PRs where I received props
+- 👀 [PR Reviews](./contributed/reviews.md) - PRs I reviewed
+- 💬 [PR Comments](./contributed/comments.md) - PRs I commented on
+- ✅ [Props Received](./contributed/with-props.md) - PRs where I got props
+- ⏳ [No Props Yet](./contributed/without-props.md) - PRs awaiting props
 
 ### 📁 My Authored PRs
 - 🟡 [Open PRs](./my-prs/open.md) - My PRs still open
@@ -509,18 +648,18 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 ### Contributions on Others' PRs
 | Metric | Count |
 |--------|-------|
-| 👀 PR Reviews | ${reviews} |
-| 💬 PR Comments | ${comments} |
-| ✅ Props Received | ${withProps} |
-| ⏳ No Props Yet | ${withoutProps} |
+| [👀 PR Reviews](./contributed/reviews.md) | ${reviews} |
+| [💬 PR Comments](./contributed/comments.md) | ${comments} |
+| [✅ Props Received](./contributed/with-props.md) | ${withProps} |
+| [⏳ No Props Yet](./contributed/without-props.md) | ${withoutProps} |
 | **Total Involved** | **${allPRs.length}** |
 
 ### My Authored PRs
 | Status | Count |
 |--------|-------|
-| 🟡 Open | ${myOpen} |
-| ❌ Closed | ${myClosed} |
-| ✅ Merged | ${myMerged} |
+| [🟡 Open](./my-prs/open.md) | ${myOpen} |
+| [❌ Closed](./my-prs/closed.md) | ${myClosed} |
+| [✅ Merged](./my-prs/merged.md) | ${myMerged} |
 | **Total** | **${myPRs.length}** |
 
 ---
@@ -544,18 +683,32 @@ async function main() {
 
   console.log('\n📝 Generating files...');
 
-  // Ensure my-prs directory exists
+  // Ensure directories exist
   if (!fs.existsSync(MY_PRS_DIR)) {
     fs.mkdirSync(MY_PRS_DIR, { recursive: true });
   }
+  if (!fs.existsSync(CONTRIBUTED_DIR)) {
+    fs.mkdirSync(CONTRIBUTED_DIR, { recursive: true });
+  }
 
-  // Generate and write files
-  const contributedContent = generateContributedContent(allPRs);
-  fs.writeFileSync(CONTRIBUTED_FILE, contributedContent);
+  // Generate contributed files
+  fs.writeFileSync(CONTRIBUTED_FILE, generateContributedContent(allPRs));
   console.log('   ✅ Updated contributed/issues-prs.md');
 
-  const mergedContent = generateMergedContent(allPRs);
-  fs.writeFileSync(MERGED_FILE, mergedContent);
+  fs.writeFileSync(CONTRIBUTED_REVIEWS, generateReviewsFile(allPRs));
+  console.log('   ✅ Updated contributed/reviews.md');
+
+  fs.writeFileSync(CONTRIBUTED_COMMENTS, generateCommentsFile(allPRs));
+  console.log('   ✅ Updated contributed/comments.md');
+
+  fs.writeFileSync(CONTRIBUTED_WITH_PROPS, generateWithPropsFile(allPRs));
+  console.log('   ✅ Updated contributed/with-props.md');
+
+  fs.writeFileSync(CONTRIBUTED_WITHOUT_PROPS, generateWithoutPropsFile(allPRs));
+  console.log('   ✅ Updated contributed/without-props.md');
+
+  // Generate merged file
+  fs.writeFileSync(MERGED_FILE, generateMergedContent(allPRs));
   console.log('   ✅ Updated merged/prs.md');
 
   // Generate my-prs files
@@ -568,8 +721,8 @@ async function main() {
   fs.writeFileSync(MY_PRS_MERGED, generateMyMergedPRs(myPRs));
   console.log('   ✅ Updated my-prs/merged.md');
 
-  const readmeContent = updateReadme(allPRs, myPRs);
-  fs.writeFileSync(README_FILE, readmeContent);
+  // Generate README
+  fs.writeFileSync(README_FILE, updateReadme(allPRs, myPRs));
   console.log('   ✅ Updated README.md');
 
   const withProps = allPRs.filter(p => p.hasProps).length;
