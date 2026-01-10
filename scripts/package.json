@@ -1,0 +1,12 @@
+{
+  "name": "gutenberg-contributions-sync",
+  "version": "1.0.0",
+  "description": "Auto-sync Gutenberg contributions from GitHub",
+  "main": "sync.js",
+  "scripts": {
+    "sync": "node sync.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.2"
+  }
+}
