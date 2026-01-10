@@ -19,6 +19,9 @@ const CONTRIBUTED_REVIEWS = path.join(CONTRIBUTED_DIR, 'reviews.md');
 const CONTRIBUTED_COMMENTS = path.join(CONTRIBUTED_DIR, 'comments.md');
 const CONTRIBUTED_WITH_PROPS = path.join(CONTRIBUTED_DIR, 'with-props.md');
 const CONTRIBUTED_WITHOUT_PROPS = path.join(CONTRIBUTED_DIR, 'without-props.md');
+const CONTRIBUTED_PROPS_WAITING = path.join(CONTRIBUTED_DIR, 'props-waiting.md');
+const CONTRIBUTED_CLOSED_NO_PROPS = path.join(CONTRIBUTED_DIR, 'closed-no-props.md');
+const CONTRIBUTED_MERGED_NO_PROPS = path.join(CONTRIBUTED_DIR, 'merged-no-props.md');
 const MERGED_FILE = path.join(ROOT_DIR, 'merged', 'prs.md');
 const README_FILE = path.join(ROOT_DIR, 'README.md');
 const MY_PRS_DIR = path.join(ROOT_DIR, 'my-prs');
@@ -487,6 +490,106 @@ PRs where I contributed but haven't received props yet.
   return content;
 }
 
+// Generate contributed/props-waiting.md - Open PRs waiting for merge
+function generatePropsWaitingFile(allPRs) {
+  const waiting = allPRs.filter(p => !p.hasProps && p.state === 'open');
+
+  let content = `# 🔄 Props Waiting
+
+PRs that are still **open** - will receive props when merged.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (waiting.length === 0) {
+    content += `*No open PRs waiting for props*\n\n`;
+  } else {
+    for (const pr of waiting) {
+      const typeIcon = pr.contributionType === 'review' ? '👀' : '💬';
+      content += `- 🔄 [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Contribution**: ${typeIcon} ${pr.contributionType === 'review' ? 'Review' : 'Comment'}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Props Waiting**: ${waiting.length} PRs
+`;
+
+  return content;
+}
+
+// Generate contributed/closed-no-props.md - Closed PRs without merge
+function generateClosedNoPropsFile(allPRs) {
+  const closed = allPRs.filter(p => !p.hasProps && p.state === 'closed' && !p.isMerged);
+
+  let content = `# ❌ Closed (No Props)
+
+PRs that were **closed without being merged** - no props possible.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (closed.length === 0) {
+    content += `*No closed PRs*\n\n`;
+  } else {
+    for (const pr of closed) {
+      const typeIcon = pr.contributionType === 'review' ? '👀' : '💬';
+      content += `- ❌ [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Contribution**: ${typeIcon} ${pr.contributionType === 'review' ? 'Review' : 'Comment'}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Closed**: ${closed.length} PRs
+`;
+
+  return content;
+}
+
+// Generate contributed/merged-no-props.md - Merged but no props
+function generateMergedNoPropsFile(allPRs) {
+  const mergedNoProps = allPRs.filter(p => !p.hasProps && p.isMerged);
+
+  let content = `# 🤔 Merged (No Props)
+
+PRs that were **merged** but I didn't receive props in the commit message.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (mergedNoProps.length === 0) {
+    content += `*All merged PRs have given props!*\n\n`;
+  } else {
+    for (const pr of mergedNoProps) {
+      const typeIcon = pr.contributionType === 'review' ? '👀' : '💬';
+      content += `- 🤔 [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Contribution**: ${typeIcon} ${pr.contributionType === 'review' ? 'Review' : 'Comment'}\n`;
+      content += `  - **Date**: ${formatDate(pr.created_at)}\n`;
+      content += `  - **Merged**: ${pr.mergedAt ? formatDate(pr.mergedAt) : 'Unknown'}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Merged (No Props)**: ${mergedNoProps.length} PRs
+`;
+
+  return content;
+}
+
 // Generate contributed/issues-prs.md content - ALL contributions
 function generateContributedContent(allPRs) {
   // Sort by date descending
@@ -608,9 +711,13 @@ Only PRs where I received props in the merge commit.
 // Update README.md with stats
 function updateReadme(allPRs, myPRs = []) {
   const withProps = allPRs.filter(p => p.hasProps).length;
-  const withoutProps = allPRs.filter(p => !p.hasProps).length;
   const reviews = allPRs.filter(p => p.contributionType === 'review').length;
   const comments = allPRs.filter(p => p.contributionType === 'comment').length;
+
+  // New props categories
+  const propsWaiting = allPRs.filter(p => !p.hasProps && p.state === 'open').length;
+  const closedNoProps = allPRs.filter(p => !p.hasProps && p.state === 'closed' && !p.isMerged).length;
+  const mergedNoProps = allPRs.filter(p => !p.hasProps && p.isMerged).length;
 
   const myOpen = myPRs.filter(p => p.state === 'open').length;
   const myClosed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
@@ -633,7 +740,9 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 - 👀 [PR Reviews](./contributed/reviews.md) - PRs I reviewed
 - 💬 [PR Comments](./contributed/comments.md) - PRs I commented on
 - ✅ [Props Received](./contributed/with-props.md) - PRs where I got props
-- ⏳ [No Props Yet](./contributed/without-props.md) - PRs awaiting props
+- 🔄 [Props Waiting](./contributed/props-waiting.md) - Open PRs, will get props when merged
+- ❌ [Closed (No Props)](./contributed/closed-no-props.md) - Closed without merge
+- 🤔 [Merged (No Props)](./contributed/merged-no-props.md) - Merged but no props received
 
 ### 📁 My Authored PRs
 - 🟡 [Open PRs](./my-prs/open.md) - My PRs still open
@@ -651,7 +760,9 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | [👀 PR Reviews](./contributed/reviews.md) | ${reviews} |
 | [💬 PR Comments](./contributed/comments.md) | ${comments} |
 | [✅ Props Received](./contributed/with-props.md) | ${withProps} |
-| [⏳ No Props Yet](./contributed/without-props.md) | ${withoutProps} |
+| [🔄 Props Waiting](./contributed/props-waiting.md) | ${propsWaiting} |
+| [❌ Closed (No Props)](./contributed/closed-no-props.md) | ${closedNoProps} |
+| [🤔 Merged (No Props)](./contributed/merged-no-props.md) | ${mergedNoProps} |
 | **Total Involved** | **${allPRs.length}** |
 
 ### My Authored PRs
@@ -706,6 +817,15 @@ async function main() {
 
   fs.writeFileSync(CONTRIBUTED_WITHOUT_PROPS, generateWithoutPropsFile(allPRs));
   console.log('   ✅ Updated contributed/without-props.md');
+
+  fs.writeFileSync(CONTRIBUTED_PROPS_WAITING, generatePropsWaitingFile(allPRs));
+  console.log('   ✅ Updated contributed/props-waiting.md');
+
+  fs.writeFileSync(CONTRIBUTED_CLOSED_NO_PROPS, generateClosedNoPropsFile(allPRs));
+  console.log('   ✅ Updated contributed/closed-no-props.md');
+
+  fs.writeFileSync(CONTRIBUTED_MERGED_NO_PROPS, generateMergedNoPropsFile(allPRs));
+  console.log('   ✅ Updated contributed/merged-no-props.md');
 
   // Generate merged file
   fs.writeFileSync(MERGED_FILE, generateMergedContent(allPRs));
