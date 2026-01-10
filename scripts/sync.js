@@ -16,6 +16,10 @@ const ROOT_DIR = path.join(__dirname, '..');
 const CONTRIBUTED_FILE = path.join(ROOT_DIR, 'contributed', 'issues-prs.md');
 const MERGED_FILE = path.join(ROOT_DIR, 'merged', 'prs.md');
 const README_FILE = path.join(ROOT_DIR, 'README.md');
+const MY_PRS_DIR = path.join(ROOT_DIR, 'my-prs');
+const MY_PRS_OPEN = path.join(MY_PRS_DIR, 'open.md');
+const MY_PRS_CLOSED = path.join(MY_PRS_DIR, 'closed.md');
+const MY_PRS_MERGED = path.join(MY_PRS_DIR, 'merged.md');
 
 // Date helpers
 const formatDate = (dateStr) => {
@@ -187,6 +191,166 @@ async function fetchAllInvolvedPRs() {
   return involved;
 }
 
+// Fetch PRs authored by user (my own PRs)
+async function fetchMyAuthoredPRs() {
+  console.log('📥 Fetching my authored PRs...');
+  const myPRs = [];
+
+  try {
+    // Search for all PRs authored by user
+    const searchResult = await octokit.paginate(
+      octokit.rest.search.issuesAndPullRequests,
+      {
+        q: `repo:${REPO_OWNER}/${REPO_NAME} is:pr author:${USERNAME}`,
+        per_page: 100
+      }
+    );
+
+    for (const pr of searchResult) {
+      let isMerged = false;
+      let mergedAt = null;
+      let closedAt = null;
+
+      // Get PR details
+      try {
+        const prDetails = await octokit.rest.pulls.get({
+          owner: REPO_OWNER,
+          repo: REPO_NAME,
+          pull_number: pr.number
+        });
+
+        if (prDetails.data.merged_at) {
+          isMerged = true;
+          mergedAt = prDetails.data.merged_at;
+        }
+        if (prDetails.data.closed_at) {
+          closedAt = prDetails.data.closed_at;
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+
+      myPRs.push({
+        number: pr.number,
+        title: pr.title,
+        url: pr.html_url,
+        state: pr.state, // 'open' or 'closed'
+        isMerged,
+        mergedAt,
+        closedAt,
+        created_at: pr.created_at
+      });
+    }
+
+    const open = myPRs.filter(p => p.state === 'open').length;
+    const closed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
+    const merged = myPRs.filter(p => p.isMerged).length;
+
+    console.log(`   Found ${myPRs.length} authored PRs`);
+    console.log(`   - Open: ${open}`);
+    console.log(`   - Closed: ${closed}`);
+    console.log(`   - Merged: ${merged}`);
+  } catch (error) {
+    console.error('Error fetching authored PRs:', error.message);
+  }
+
+  return myPRs;
+}
+
+// Generate my-prs/open.md
+function generateMyOpenPRs(myPRs) {
+  const open = myPRs.filter(p => p.state === 'open');
+
+  let content = `# My Authored PRs (Open)
+
+PRs I submitted to Gutenberg that are still open.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (open.length === 0) {
+    content += `*No open PRs*\n\n`;
+  } else {
+    for (const pr of open) {
+      content += `- 🟡 [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Created**: ${formatDate(pr.created_at)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Open**: ${open.length} PRs
+`;
+
+  return content;
+}
+
+// Generate my-prs/closed.md
+function generateMyClosedPRs(myPRs) {
+  const closed = myPRs.filter(p => p.state === 'closed' && !p.isMerged);
+
+  let content = `# My Authored PRs (Closed)
+
+PRs I submitted to Gutenberg that were closed without merging.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (closed.length === 0) {
+    content += `*No closed PRs*\n\n`;
+  } else {
+    for (const pr of closed) {
+      content += `- ❌ [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Created**: ${formatDate(pr.created_at)}\n`;
+      content += `  - **Closed**: ${formatDate(pr.closedAt)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Closed**: ${closed.length} PRs
+`;
+
+  return content;
+}
+
+// Generate my-prs/merged.md
+function generateMyMergedPRs(myPRs) {
+  const merged = myPRs.filter(p => p.isMerged);
+
+  let content = `# My Authored PRs (Merged)
+
+PRs I submitted to Gutenberg that got merged.
+
+<!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
+<!-- Last synced: ${new Date().toISOString()} -->
+
+`;
+
+  if (merged.length === 0) {
+    content += `*No merged PRs yet*\n\n`;
+  } else {
+    for (const pr of merged) {
+      content += `- ✅ [#${pr.number}](${pr.url}) - ${pr.title}\n`;
+      content += `  - **Merged**: ${formatDate(pr.mergedAt)}\n\n`;
+    }
+  }
+
+  content += `<!-- AUTO-SYNC END -->
+
+---
+**Total Merged**: ${merged.length} PRs
+`;
+
+  return content;
+}
+
 // Generate contributed/issues-prs.md content - ALL contributions
 function generateContributedContent(allPRs) {
   // Sort by date descending
@@ -306,12 +470,15 @@ Only PRs where I received props in the merge commit.
 }
 
 // Update README.md with stats
-function updateReadme(allPRs) {
+function updateReadme(allPRs, myPRs = []) {
   const withProps = allPRs.filter(p => p.hasProps).length;
   const withoutProps = allPRs.filter(p => !p.hasProps).length;
   const reviews = allPRs.filter(p => p.contributionType === 'review').length;
   const comments = allPRs.filter(p => p.contributionType === 'comment').length;
-  const merged = allPRs.filter(p => p.isMerged && p.hasProps).length;
+
+  const myOpen = myPRs.filter(p => p.state === 'open').length;
+  const myClosed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
+  const myMerged = myPRs.filter(p => p.isMerged).length;
 
   const today = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -324,11 +491,22 @@ function updateReadme(allPRs) {
 Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## Quick Navigation
+
+### 📊 Contributions (on others' PRs)
 - 📝 [All Contributions](./contributed/issues-prs.md) - Every PR I'm involved in
-- ✅ [Merged PRs](./merged/prs.md) - PRs merged with my props
-- 🎯 [2026 Goals](./next-targets/2026-goals.md) - Contribution goals
+- ✅ [Merged PRs (Props)](./merged/prs.md) - PRs where I received props
+
+### 📁 My Authored PRs
+- 🟡 [Open PRs](./my-prs/open.md) - My PRs still open
+- ❌ [Closed PRs](./my-prs/closed.md) - My PRs closed without merge
+- ✅ [Merged PRs](./my-prs/merged.md) - My PRs that got merged
+
+### 🎯 Goals
+- [2026 Goals](./next-targets/2026-goals.md) - Contribution goals
 
 ## Stats (Auto-Updated)
+
+### Contributions on Others' PRs
 | Metric | Count |
 |--------|-------|
 | 👀 PR Reviews | ${reviews} |
@@ -336,6 +514,14 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | ✅ Props Received | ${withProps} |
 | ⏳ No Props Yet | ${withoutProps} |
 | **Total Involved** | **${allPRs.length}** |
+
+### My Authored PRs
+| Status | Count |
+|--------|-------|
+| 🟡 Open | ${myOpen} |
+| ❌ Closed | ${myClosed} |
+| ✅ Merged | ${myMerged} |
+| **Total** | **${myPRs.length}** |
 
 ---
 **Last Synced**: ${today}
@@ -353,7 +539,15 @@ async function main() {
   // Fetch ALL involved PRs with props status
   const allPRs = await fetchAllInvolvedPRs();
 
+  // Fetch my authored PRs
+  const myPRs = await fetchMyAuthoredPRs();
+
   console.log('\n📝 Generating files...');
+
+  // Ensure my-prs directory exists
+  if (!fs.existsSync(MY_PRS_DIR)) {
+    fs.mkdirSync(MY_PRS_DIR, { recursive: true });
+  }
 
   // Generate and write files
   const contributedContent = generateContributedContent(allPRs);
@@ -364,17 +558,32 @@ async function main() {
   fs.writeFileSync(MERGED_FILE, mergedContent);
   console.log('   ✅ Updated merged/prs.md');
 
-  const readmeContent = updateReadme(allPRs);
+  // Generate my-prs files
+  fs.writeFileSync(MY_PRS_OPEN, generateMyOpenPRs(myPRs));
+  console.log('   ✅ Updated my-prs/open.md');
+
+  fs.writeFileSync(MY_PRS_CLOSED, generateMyClosedPRs(myPRs));
+  console.log('   ✅ Updated my-prs/closed.md');
+
+  fs.writeFileSync(MY_PRS_MERGED, generateMyMergedPRs(myPRs));
+  console.log('   ✅ Updated my-prs/merged.md');
+
+  const readmeContent = updateReadme(allPRs, myPRs);
   fs.writeFileSync(README_FILE, readmeContent);
   console.log('   ✅ Updated README.md');
 
   const withProps = allPRs.filter(p => p.hasProps).length;
   const merged = allPRs.filter(p => p.isMerged && p.hasProps).length;
+  const myOpen = myPRs.filter(p => p.state === 'open').length;
+  const myClosed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
+  const myMerged = myPRs.filter(p => p.isMerged).length;
 
   console.log('\n✨ Sync complete!');
   console.log(`   📊 Total Involved: ${allPRs.length}`);
   console.log(`   ✅ Props Received: ${withProps}`);
   console.log(`   🎯 Merged with Props: ${merged}`);
+  console.log(`   📝 My PRs: ${myPRs.length} (Open: ${myOpen}, Closed: ${myClosed}, Merged: ${myMerged})`);
 }
 
 main().catch(console.error);
+
