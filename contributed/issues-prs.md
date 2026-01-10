@@ -3,7 +3,7 @@
 ## PRs Tested & Reviewed
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T07:52:28.794Z -->
+<!-- Last synced: 2026-01-10T08:06:30.656Z -->
 
 ### November 2025
 - 👀 [#73660](https://github.com/WordPress/gutenberg/pull/73660) - **Review** (November 30, 2025)

@@ -12,8 +12,8 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 |--------|-------|
 | 💬 Comments | 0 |
 | 👀 PR Reviews | 1 |
-| ✅ Merged (Props) | 3 |
-| **Total** | **4** |
+| ✅ Merged (Props) | 2 |
+| **Total** | **3** |
 
 ---
 **Last Synced**: January 10, 2026

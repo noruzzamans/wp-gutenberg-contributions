@@ -1,7 +1,7 @@
 # Merged PRs (Props Received)
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T07:52:28.853Z -->
+<!-- Last synced: 2026-01-10T08:06:30.671Z -->
 
 ## 2026
 
@@ -17,12 +17,7 @@
   - **Merged**: December 2, 2025
   - **Contribution**: Testing and feedback
 
-### November
-- ✅ [#73143](https://github.com/WordPress/gutenberg/pull/73143) - Math format: remove empty format on serialise
-  - **Merged**: November 11, 2025
-  - **Contribution**: Testing and feedback
-
 <!-- AUTO-SYNC END -->
 
 ---
-**Total Merged**: 3 PRs
+**Total Merged**: 2 PRs
