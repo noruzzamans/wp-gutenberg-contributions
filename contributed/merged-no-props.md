@@ -3,7 +3,7 @@
 PRs that were **merged** but I didn't receive props in the commit message.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T14:48:46.628Z -->
+<!-- Last synced: 2026-01-10T14:55:17.612Z -->
 
 - 🤔 [#73143](https://github.com/WordPress/gutenberg/pull/73143) - Math format: remove empty format on serialise
   - **Contribution**: 💬 Comment
