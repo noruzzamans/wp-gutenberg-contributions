@@ -3,7 +3,7 @@
 PRs I submitted to Gutenberg that are still open.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T15:15:11.795Z -->
+<!-- Last synced: 2026-01-10T15:20:06.387Z -->
 
 *No open PRs*
 
