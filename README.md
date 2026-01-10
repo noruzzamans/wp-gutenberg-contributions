@@ -25,12 +25,12 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 <table width="100%">
 <tr>
-<td width="33.33%" align="center"><b>📊 Contributions</b></td>
-<td width="33.33%" align="center"><b>📁 My PRs</b></td>
-<td width="33.34%" align="center"><b>🎯 Highlights</b></td>
+<td width="33.33%" align="center" valign="top"><b>📊 Contributions</b></td>
+<td width="33.33%" align="center" valign="top"><b>📁 My PRs</b></td>
+<td width="33.34%" align="center" valign="top"><b>🎯 Highlights</b></td>
 </tr>
 <tr>
-<td width="33.33%">
+<td width="33.33%" valign="top">
 
 | Metric | Count |
 |:-------|------:|
@@ -43,7 +43,7 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | **Total** | **7** |
 
 </td>
-<td width="33.33%">
+<td width="33.33%" valign="top">
 
 | Status | Count |
 |:-------|------:|
@@ -53,13 +53,13 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | **Total** | **2** |
 
 </td>
-<td width="33.34%">
+<td width="33.34%" valign="top">
 
 | Metric | Value |
 |:-------|:------|
 | 📈 Props Rate | **29%** |
 | 🎉 Total | **9** PRs |
-| � Active | **2** pending |
+| 🔥 Active | **2** pending |
 | ⭐ Success | **2** completed |
 
 </td>
