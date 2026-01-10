@@ -23,7 +23,7 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## 📈 Stats (Auto-Updated)
 
-<table width="100%">
+<table width="100%" style="width: 100% !important;">
 <tr>
 <td width="33.33%" align="center" valign="top"><b>📊 Contributions</b></td>
 <td width="33.33%" align="center" valign="top"><b>📁 My PRs</b></td>

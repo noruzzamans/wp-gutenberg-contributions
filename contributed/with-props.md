@@ -3,7 +3,7 @@
 PRs where I received props in the merge commit.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T15:10:57.973Z -->
+<!-- Last synced: 2026-01-10T15:15:11.453Z -->
 
 - ✅ [#73660](https://github.com/WordPress/gutenberg/pull/73660) - Update the useCommandLoader example to fix the syntax error and add missing imports.
   - **Contribution**: 👀 Review
