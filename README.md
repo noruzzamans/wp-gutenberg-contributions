@@ -9,7 +9,9 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 - 👀 [PR Reviews](./contributed/reviews.md) - PRs I reviewed
 - 💬 [PR Comments](./contributed/comments.md) - PRs I commented on
 - ✅ [Props Received](./contributed/with-props.md) - PRs where I got props
-- ⏳ [No Props Yet](./contributed/without-props.md) - PRs awaiting props
+- 🔄 [Props Waiting](./contributed/props-waiting.md) - Open PRs, will get props when merged
+- ❌ [Closed (No Props)](./contributed/closed-no-props.md) - Closed without merge
+- 🤔 [Merged (No Props)](./contributed/merged-no-props.md) - Merged but no props received
 
 ### 📁 My Authored PRs
 - 🟡 [Open PRs](./my-prs/open.md) - My PRs still open
@@ -27,7 +29,9 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | [👀 PR Reviews](./contributed/reviews.md) | 1 |
 | [💬 PR Comments](./contributed/comments.md) | 6 |
 | [✅ Props Received](./contributed/with-props.md) | 2 |
-| [⏳ No Props Yet](./contributed/without-props.md) | 5 |
+| [🔄 Props Waiting](./contributed/props-waiting.md) | 2 |
+| [❌ Closed (No Props)](./contributed/closed-no-props.md) | 2 |
+| [🤔 Merged (No Props)](./contributed/merged-no-props.md) | 1 |
 | **Total Involved** | **7** |
 
 ### My Authored PRs
