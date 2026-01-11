@@ -815,6 +815,27 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
   return content;
 }
 
+// Generate stats.json for Profile README
+function generateStatsJson(allPRs, myPRs) {
+  const withProps = allPRs.filter(p => p.hasProps).length;
+  const mergedNoProps = allPRs.filter(p => !p.hasProps && p.isMerged).length;
+  const myMerged = myPRs.filter(p => p.isMerged).length;
+  const propsWaiting = allPRs.filter(p => !p.hasProps && p.state === 'open').length;
+  const reviews = allPRs.filter(p => p.contributionType === 'review').length;
+
+  const stats = {
+    total_involved: allPRs.length,
+    with_props: withProps,
+    merged_no_props: mergedNoProps,
+    my_authored_merged: myMerged,
+    props_waiting: propsWaiting,
+    reviews: reviews,
+    last_updated: new Date().toISOString()
+  };
+
+  return JSON.stringify(stats, null, 2);
+}
+
 // Main sync function
 async function main() {
   console.log('🚀 Starting Gutenberg contributions sync...\n');
@@ -876,17 +897,21 @@ async function main() {
   fs.writeFileSync(MY_PRS_MERGED, generateMyMergedPRs(myPRs));
   console.log('   ✅ Updated my-prs/merged.md');
 
-  // Generate README
-  fs.writeFileSync(README_FILE, updateReadme(allPRs, myPRs));
+  // Update README
+  fs.writeFileSync(path.join(__dirname, '..', 'README.md'), updateReadme(allPRs, myPRs));
   console.log('   ✅ Updated README.md');
 
+  // Write stats.json
+  fs.writeFileSync(path.join(__dirname, '..', 'stats.json'), generateStatsJson(allPRs, myPRs));
+  console.log('   ✅ Created stats.json (for Profile generation)');
+
+  console.log('\n✨ Sync complete!');
   const withProps = allPRs.filter(p => p.hasProps).length;
   const merged = allPRs.filter(p => p.isMerged && p.hasProps).length;
   const myOpen = myPRs.filter(p => p.state === 'open').length;
   const myClosed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
   const myMerged = myPRs.filter(p => p.isMerged).length;
 
-  console.log('\n✨ Sync complete!');
   console.log(`   📊 Total Involved: ${allPRs.length}`);
   console.log(`   ✅ Props Received: ${withProps}`);
   console.log(`   🎯 Merged with Props: ${merged}`);
