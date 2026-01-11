@@ -3,7 +3,7 @@
 PRs where I submitted a review.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-10T15:20:06.166Z -->
+<!-- Last synced: 2026-01-11T01:21:18.869Z -->
 
 - 👀 [#73660](https://github.com/WordPress/gutenberg/pull/73660) - Update the useCommandLoader example to fix the syntax error and add missing imports.
   - **Date**: November 30, 2025 | **Props**: ✅
