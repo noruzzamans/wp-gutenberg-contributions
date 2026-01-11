@@ -274,7 +274,7 @@ function generateMyOpenPRs(myPRs) {
 PRs I submitted to Gutenberg that are still open.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -305,7 +305,7 @@ function generateMyClosedPRs(myPRs) {
 PRs I submitted to Gutenberg that were closed without merging.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -337,7 +337,7 @@ function generateMyMergedPRs(myPRs) {
 PRs I submitted to Gutenberg that got merged.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -368,7 +368,7 @@ function generateReviewsFile(allPRs) {
 PRs where I submitted a review.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -400,7 +400,7 @@ function generateCommentsFile(allPRs) {
 PRs where I left comments.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -432,7 +432,7 @@ function generateWithPropsFile(allPRs) {
 PRs where I received props in the merge commit.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -465,7 +465,7 @@ function generateWithoutPropsFile(allPRs) {
 PRs where I contributed but haven't received props yet.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -499,7 +499,7 @@ function generatePropsWaitingFile(allPRs) {
 PRs that are still **open** - will receive props when merged.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -532,7 +532,7 @@ function generateClosedNoPropsFile(allPRs) {
 PRs that were **closed without being merged** - no props possible.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -565,7 +565,7 @@ function generateMergedNoPropsFile(allPRs) {
 PRs that were **merged** but I didn't receive props in the commit message.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -615,7 +615,7 @@ This file tracks ALL PRs/issues where I'm involved (comments, reviews, props).
 - ⏳ Pending - Not yet merged / No props
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -679,7 +679,7 @@ function generateMergedContent(allPRs) {
 Only PRs where I received props in the merge commit.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: ${new Date().toISOString()} -->
+<!-- Last synced: Automated -->
 
 `;
 
@@ -798,7 +798,7 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 </table>
 
 ---
-**Last Synced**: ${today}
+**Last Synced**: Automated
 `;
 
   return content;
@@ -883,4 +883,5 @@ async function main() {
 }
 
 main().catch(console.error);
+
 
