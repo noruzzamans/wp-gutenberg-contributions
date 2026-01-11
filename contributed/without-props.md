@@ -3,7 +3,7 @@
 PRs where I contributed but haven't received props yet.
 
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
-<!-- Last synced: 2026-01-11T01:21:18.870Z -->
+<!-- Last synced: Automated -->
 
 - ⏳ [#74229](https://github.com/WordPress/gutenberg/pull/74229) - Query Loop: Add Random order option
   - **Contribution**: 💬 Comment
@@ -15,7 +15,7 @@ PRs where I contributed but haven't received props yet.
 
 - ⏳ [#73493](https://github.com/WordPress/gutenberg/pull/73493) - add support for custom labels in Dataviews
   - **Contribution**: 💬 Comment
-  - **Date**: November 21, 2025 | **Status**: Open/Closed
+  - **Date**: November 22, 2025 | **Status**: Open/Closed
 
 - ⏳ [#73320](https://github.com/WordPress/gutenberg/pull/73320) - Global Styles: Add textShadow style support
   - **Contribution**: 💬 Comment

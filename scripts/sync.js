@@ -735,6 +735,10 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ## Quick Navigation
 
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+
 ### 📊 Contributions (on others' PRs)
 - 📝 [All Contributions](./contributed/issues-prs.md) - Every PR I'm involved in
 - 👀 [PR Reviews](./contributed/reviews.md) - PRs I reviewed
@@ -744,6 +748,9 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 - ❌ [Closed (No Props)](./contributed/closed-no-props.md) - Closed without merge
 - 🤔 [Merged (No Props)](./contributed/merged-no-props.md) - Merged but no props received
 
+</td>
+<td width="50%" valign="top">
+
 ### 📁 My Authored PRs
 - 🟡 [Open PRs](./my-prs/open.md) - My PRs still open
 - ❌ [Closed PRs](./my-prs/closed.md) - My PRs closed without merge
@@ -751,6 +758,10 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 
 ### 🎯 Goals
 - [2026 Goals](./next-targets/2026-goals.md) - Contribution goals
+
+</td>
+</tr>
+</table>
 
 ## 📈 Stats (Auto-Updated)
 
