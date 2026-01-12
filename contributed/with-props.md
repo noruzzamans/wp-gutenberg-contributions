@@ -11,7 +11,7 @@ PRs where I received props in the merge commit.
 
 - ✅ [#73651](https://github.com/WordPress/gutenberg/pull/73651) - Docs: add JSDoc for getUserLabel in users autocompleter
   - **Contribution**: 💬 Comment
-  - **Date**: November 29, 2025
+  - **Date**: November 28, 2025
 
 <!-- AUTO-SYNC END -->
 

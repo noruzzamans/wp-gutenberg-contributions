@@ -12,10 +12,10 @@ PRs where I left comments.
   - **Date**: December 2, 2025 | **Props**: ⏳
 
 - 💬 [#73651](https://github.com/WordPress/gutenberg/pull/73651) - Docs: add JSDoc for getUserLabel in users autocompleter
-  - **Date**: November 29, 2025 | **Props**: ✅
+  - **Date**: November 28, 2025 | **Props**: ✅
 
 - 💬 [#73493](https://github.com/WordPress/gutenberg/pull/73493) - add support for custom labels in Dataviews
-  - **Date**: November 22, 2025 | **Props**: ⏳
+  - **Date**: November 21, 2025 | **Props**: ⏳
 
 - 💬 [#73320](https://github.com/WordPress/gutenberg/pull/73320) - Global Styles: Add textShadow style support
   - **Date**: November 15, 2025 | **Props**: ⏳

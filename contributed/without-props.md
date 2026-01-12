@@ -15,7 +15,7 @@ PRs where I contributed but haven't received props yet.
 
 - ⏳ [#73493](https://github.com/WordPress/gutenberg/pull/73493) - add support for custom labels in Dataviews
   - **Contribution**: 💬 Comment
-  - **Date**: November 22, 2025 | **Status**: Open/Closed
+  - **Date**: November 21, 2025 | **Status**: Open/Closed
 
 - ⏳ [#73320](https://github.com/WordPress/gutenberg/pull/73320) - Global Styles: Add textShadow style support
   - **Contribution**: 💬 Comment
