@@ -723,12 +723,6 @@ function updateReadme(allPRs, myPRs = []) {
   const myClosed = myPRs.filter(p => p.state === 'closed' && !p.isMerged).length;
   const myMerged = myPRs.filter(p => p.isMerged).length;
 
-  const today = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-
   const content = `# WordPress Gutenberg Contributions
 
 Personal tracking for WordPress Gutenberg (Block Editor) contributions.
@@ -829,8 +823,7 @@ function generateStatsJson(allPRs, myPRs) {
     merged_no_props: mergedNoProps,
     my_authored_merged: myMerged,
     props_waiting: propsWaiting,
-    reviews: reviews,
-    last_updated: new Date().toISOString()
+    reviews: reviews
   };
 
   return JSON.stringify(stats, null, 2);
