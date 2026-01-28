@@ -46,12 +46,12 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 | Metric | Count |
 |:-------|------:|
 | [👀 Reviews](./contributed/reviews.md) | 1 |
-| [💬 Comments](./contributed/comments.md) | 6 |
-| [✅ Props](./contributed/with-props.md) | 2 |
+| [💬 Comments](./contributed/comments.md) | 7 |
+| [✅ Props](./contributed/with-props.md) | 3 |
 | [🔄 Waiting](./contributed/props-waiting.md) | 2 |
 | [❌ Closed](./contributed/closed-no-props.md) | 2 |
 | [🤔 No Props](./contributed/merged-no-props.md) | 1 |
-| **Total** | **7** |
+| **Total** | **8** |
 
 </td>
 <td width="33.33%" valign="top">
@@ -60,18 +60,18 @@ Personal tracking for WordPress Gutenberg (Block Editor) contributions.
 |:-------|------:|
 | [🟡 Open](./my-prs/open.md) | 0 |
 | [❌ Closed](./my-prs/closed.md) | 2 |
-| [✅ Merged](./my-prs/merged.md) | 0 |
-| **Total** | **2** |
+| [✅ Merged](./my-prs/merged.md) | 1 |
+| **Total** | **3** |
 
 </td>
 <td width="33.34%" valign="top">
 
 | Metric | Value |
 |:-------|:------|
-| 📈 Props Rate | **29%** |
-| 🎉 Total | **9** PRs |
+| 📈 Props Rate | **38%** |
+| 🎉 Total | **11** PRs |
 | 🔥 Active | **2** pending |
-| ⭐ Success | **2** completed |
+| ⭐ Success | **4** completed |
 
 </td>
 </tr>

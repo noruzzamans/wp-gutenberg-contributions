@@ -11,6 +11,13 @@ This file tracks ALL PRs/issues where I'm involved (comments, reviews, props).
 <!-- AUTO-SYNC START - DO NOT EDIT BELOW THIS LINE -->
 <!-- Last synced: Automated -->
 
+## 2026
+
+### January
+- 💬 [#74973](https://github.com/WordPress/gutenberg/pull/74973) - Added Missing Global Documentation class-wp-rest-block-editor-settings-controller file
+  - **Type**: Comment | **Status**: ✅ Props Received
+  - **Date**: January 27, 2026
+
 ## 2025
 
 ### December
@@ -49,6 +56,6 @@ This file tracks ALL PRs/issues where I'm involved (comments, reviews, props).
 ## Summary
 | Category | Count |
 |----------|-------|
-| ✅ With Props | 2 |
+| ✅ With Props | 3 |
 | ⏳ Without Props | 5 |
-| **Total** | **7** |
+| **Total** | **8** |
