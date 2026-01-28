@@ -14,6 +14,10 @@ This file tracks ALL PRs/issues where I'm involved (comments, reviews, props).
 ## 2026
 
 ### January
+- 💬 [#75004](https://github.com/WordPress/gutenberg/pull/75004) - Docs: Add missing @global documentation in block library
+  - **Type**: Comment | **Status**: ⏳ Open/Closed
+  - **Date**: January 28, 2026
+
 - 💬 [#74973](https://github.com/WordPress/gutenberg/pull/74973) - Added Missing Global Documentation class-wp-rest-block-editor-settings-controller file
   - **Type**: Comment | **Status**: ✅ Props Received
   - **Date**: January 27, 2026
@@ -57,5 +61,5 @@ This file tracks ALL PRs/issues where I'm involved (comments, reviews, props).
 | Category | Count |
 |----------|-------|
 | ✅ With Props | 3 |
-| ⏳ Without Props | 5 |
-| **Total** | **8** |
+| ⏳ Without Props | 6 |
+| **Total** | **9** |
